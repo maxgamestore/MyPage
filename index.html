@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>YOUR NAME – profile</title>
+<meta name="description" content="About me, my babies and where to find me.">
+<meta name="theme-color" content="#f2a65a">
+<meta property="og:type" content="website">
+<meta property="og:title" content="YOUR NAME">
+<meta property="og:description" content="About me, my babies and where to find me.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Michroma&family=Karla:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --void: #04050a;
+    --deep: #0b0e18;
+    --amber: #f2a65a;
+    --ember: #ff7a2f;
+    --ice: #d6e6ff;
+    --dust: #8f98ad;
+    --line: rgba(242,166,90,.28);
+    --display: "Michroma", "Eurostile", "Trebuchet MS", sans-serif;
+    --body: "Karla", "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--void);
+    color: var(--ice);
+    font-family: var(--body);
+    font-size: 1.08rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  #stars { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; }
+  main, header, footer { position: relative; z-index: 1; }
+  a { color: inherit; }
+  a:focus-visible { outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 4px; }
+
+  /* ---------- hero ---------- */
+  header {
+    min-height: 100vh;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 1.5rem 5rem;
+    overflow: hidden;
+  }
+  .hero-inner { max-width: 40rem; }
+  .gargantua { position: fixed; inset: 0; z-index: -1; pointer-events: none; }
+  .gargantua canvas { width: 100%; height: 100%; display: block; opacity: 0; transition: opacity 1.4s ease; }
+  .gargantua.ready canvas { opacity: 1; }
+  .hint { color: var(--dust); font-size: .9rem; margin-bottom: 1.6rem; }
+  h1 { animation: rise 1.8s ease both; }
+  @keyframes rise { from { opacity: 0; letter-spacing: .3em; } to { opacity: 1; letter-spacing: .06em; } }
+  main { counter-reset: sec; padding: 0 1rem; }
+  h2::before { content: "0" counter(sec); display: block; font-family: var(--body); font-size: .8rem; color: var(--amber); letter-spacing: .3em; margin-bottom: .6rem; }
+  .baby:hover h3 { text-shadow: 0 0 18px rgba(242,166,90,.7); }
+  .js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s ease, transform .9s ease; }
+  .js .reveal.in { opacity: 1; transform: none; }
+
+  h1 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.9rem, 6vw, 3.4rem);
+    letter-spacing: .06em;
+    line-height: 1.2;
+  }
+  .tagline { margin-top: 1.1rem; color: var(--dust); font-size: 1.1rem; }
+  .jump { margin-top: 2.2rem; display: inline-flex; gap: 1.6rem; flex-wrap: wrap; justify-content: center; }
+  .jump a { text-decoration: none; color: var(--amber); border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  .jump a:hover { border-color: var(--amber); }
+
+  /* ---------- sections ---------- */
+  section { max-width: 46rem; margin: 0 auto 4rem; padding: 3rem 2rem; background: rgba(8,10,20,.78); border: 1px solid rgba(214,230,255,.07); border-radius: 18px; counter-increment: sec; }
+  h2 {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 3.6vw, 1.8rem);
+    letter-spacing: .05em;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  #about p { max-width: 38rem; margin-bottom: 1.2rem; }
+  .facts { list-style: none; padding: 0; margin-top: 2rem; display: grid; gap: .6rem; }
+  .facts li { display: flex; gap: 1rem; }
+  .facts b { flex: 0 0 7.5rem; color: var(--amber); font-weight: 600; }
+
+  /* babies: name on the left, story on the right */
+  .baby {
+    display: grid;
+    grid-template-columns: 10rem 1fr;
+    gap: 1.5rem;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid rgba(214,230,255,.08);
+  }
+  .baby:last-child { border-bottom: 0; }
+  .baby h3 { font-family: var(--display); font-weight: 400; font-size: 1.05rem; color: var(--amber); letter-spacing: .04em; }
+  .baby p { color: var(--ice); max-width: 32rem; }
+
+  /* socials */
+  .socials { display: flex; flex-wrap: wrap; gap: .8rem; list-style: none; padding: 0; }
+  .socials a {
+    display: inline-block;
+    text-decoration: none;
+    padding: .65rem 1.3rem;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(11,14,24,.7);
+    transition: background .2s, border-color .2s, color .2s;
+  }
+  .socials a:hover { background: var(--amber); border-color: var(--amber); color: var(--void); }
+
+  footer { text-align: center; color: var(--dust); padding: 3rem 1.5rem 4rem; font-size: .95rem; }
+
+  @media (max-width: 560px) {
+    section { padding: 2rem 1.25rem; }
+    .baby { grid-template-columns: 1fr; gap: .4rem; }
+    .facts li { flex-direction: column; gap: 0; }
+    .facts b { flex-basis: auto; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .gargantua canvas { transition: none; }
+    h1 { animation: none; }
+    .js .reveal { transition: none; }
+  }
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<header>
+  <div class="hero-inner">
+    <div class="gargantua" aria-hidden="true"><canvas id="bh"></canvas></div>
+    <p class="hint">Move your cursor or finger to tilt the view.</p>
+    <h1>YOUR NAME</h1>
+    <p class="tagline">Write one short line about yourself here.</p>
+    <nav class="jump" aria-label="Page sections">
+      <a href="#about">About me</a>
+      <a href="#babies">My babies</a>
+      <a href="#socials">Find me</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section id="about">
+    <h2>About me</h2>
+    <p>Tell people who you are here. Where you're from, what you love, what you do all day, what makes you laugh. Write it like you're talking to a friend.</p>
+    <p>You can add a second paragraph for anything else you want people to know. :3</p>
+    <ul class="facts">
+      <li><b>Age</b> <span>Your age</span></li>
+      <li><b>Likes</b> <span>Music, games, anime, whatever you love</span></li>
+      <li><b>Currently</b> <span>What you're playing, watching or listening to</span></li>
+    </ul>
+  </section>
+
+  <section id="babies">
+    <h2>My babies</h2>
+    <article class="baby">
+      <h3>Baby One</h3>
+      <p>Description of your first baby. Who they are, what they look like, what they're like, the silly things they do.</p>
+    </article>
+    <article class="baby">
+      <h3>Baby Two</h3>
+      <p>Description of your second baby.</p>
+    </article>
+    <article class="baby">
+      <h3>Baby Three</h3>
+      <p>Description of your third baby. Copy one of these blocks to add more.</p>
+    </article>
+  </section>
+
+  <section id="socials">
+    <h2>Find me</h2>
+    <ul class="socials">
+      <li><a href="https://discord.com/users/YOUR_ID" target="_blank" rel="noopener">Discord</a></li>
+      <li><a href="https://instagram.com/YOUR_NAME" target="_blank" rel="noopener">Instagram</a></li>
+      <li><a href="https://tiktok.com/@YOUR_NAME" target="_blank" rel="noopener">TikTok</a></li>
+      <li><a href="https://twitter.com/YOUR_NAME" target="_blank" rel="noopener">X / Twitter</a></li>
+      <li><a href="https://twitch.tv/YOUR_NAME" target="_blank" rel="noopener">Twitch</a></li>
+      <li><a href="https://youtube.com/@YOUR_NAME" target="_blank" rel="noopener">YouTube</a></li>
+      <li><a href="https://open.spotify.com/user/YOUR_ID" target="_blank" rel="noopener">Spotify</a></li>
+    </ul>
+  </section>
+</main>
+
+<footer>Made with love, somewhere past the event horizon.</footer>
+
+<script>
+(function () {
+  var c = document.getElementById('stars'), x = c.getContext('2d'), stars = [], w, h;
+  var still = true;
+  function size() {
+    var d = window.devicePixelRatio || 1;
+    w = c.width = innerWidth * d; h = c.height = innerHeight * d;
+    stars = [];
+    var n = Math.round(innerWidth * innerHeight / 3500);
+    for (var i = 0; i < n; i++) stars.push({
+      x: Math.random() * w, y: Math.random() * h,
+      r: (Math.pow(Math.random(), 3) * 1.4 + .3) * d,
+      p: Math.random() * 6.28, s: Math.random() * .02 + .005, k: Math.random()
+    });
+    draw(0);
+  }
+  function draw(t) {
+    x.clearRect(0, 0, w, h);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i], a = still ? .7 : .45 + .45 * Math.sin(s.p + t * s.s * .06);
+      x.fillStyle = (s.k < .15 ? 'rgba(255,214,170,' : s.k < .3 ? 'rgba(170,200,255,' : 'rgba(225,235,255,') + a.toFixed(2) + ')';
+      x.beginPath(); x.arc(s.x, s.y, s.r, 0, 6.28); x.fill();
+    }
+    if (!still) requestAnimationFrame(draw);
+  }
+  addEventListener('resize', size);
+  size();
+  if (!still) requestAnimationFrame(draw);
+})();
+</script>
+<script>
+/* Gaură neagră în timp real (WebGL): raze curbate Schwarzschild, disc volumetric în rotație, Doppler, stele lentilate */
+(function () {
+  var wrap = document.querySelector('.gargantua'), cv = document.getElementById('bh');
+  var gl = cv.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'high-performance' });
+  if (!gl) { wrap.style.display = 'none'; return; }
+  var FS = "precision highp float;\nuniform vec2 R; uniform float T, INC, DIST;\nfloat h21(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}\nfloat vn(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);\n return mix(mix(h21(i),h21(i+vec2(1.,0.)),f.x),mix(h21(i+vec2(0.,1.)),h21(i+vec2(1.,1.)),f.x),f.y);}\nfloat fbm(vec2 p){return vn(p)*.55+vn(p*2.1+7.)*.3+vn(p*4.3+3.)*.15;}\nfloat star(vec2 uv,float sc,float k,float seed){\n  vec2 g=uv*sc,id=floor(g),f=fract(g)-.5;\n  if(h21(id+seed)<.9)return 0.;\n  vec2 o=(vec2(h21(id+seed+1.3),h21(id+seed+2.7))-.5)*.6;\n  vec2 e=f-o;\n  return exp(-dot(e,e)*k)*pow(h21(id+seed+5.),3.)*3.;\n}\nvec3 bg(vec3 d){\n  vec2 uv=vec2(atan(d.z,d.x),asin(clamp(d.y,-1.,1.)));\n  float s=star(uv,60.,54.,0.)+star(uv,130.,22.,11.)*.6;\n  vec3 tc=mix(vec3(1.,.82,.66),vec3(.7,.82,1.),h21(floor(uv*60.)));\n  float band=exp(-pow(dot(d,normalize(vec3(.3,.9,.25))),2.)*14.);\n  vec3 mw=vec3(.30,.34,.5)*band*(.35+fbm(uv*6.))*.12;\n  return tc*s+mw+vec3(.016,.02,.039);\n}\nvoid main(){\n  float hw=mix(5.,9.,smoothstep(.6,1.6,R.x/R.y));\n  vec2 uv=((gl_FragCoord.xy-vec2(0.,R.y*.14))*2.-R)/R.x*(hw/30.);\n  float ci=cos(INC),si=sin(INC);\n  vec3 p=DIST*vec3(0.,ci,si);\n  vec3 v=normalize(vec3(0.,-ci,-si)+vec3(1.,0.,0.)*uv.x+vec3(0.,si,-ci)*uv.y);\n  vec3 hh=cross(p,v); float h2=dot(hh,hh);\n  vec3 col=vec3(0.); float tr=1.,rmin=99.; bool hit=false;\n  for(int s=0;s<300;s++){\n    float r2=dot(p,p),r=sqrt(r2);\n    if(r<1.){hit=true;break;}\n    if(r>40.&&dot(p,v)>0.)break;\n    float dt=clamp(.05*r,.03,.7);\n    if(abs(p.y)<2.5&&r<13.)dt=min(dt,.13);\n    rmin=min(rmin,r);\n    v+=-1.5*h2/(r2*r2*r)*dt*p;\n    vec3 np=p+v*dt;\n    float q=length(p.xz);\n    if(q>3.&&q<11.5){\n      float hq=.035*q+.03;\n      float dn=exp(-p.y*p.y/(hq*hq));\n      if(dn>.01){\n        float a=atan(p.z,p.x)-2.8*pow(q,-1.5)*T;\n        vec2 pr=q*vec2(cos(a),sin(a));\n        float tex=(.3+.9*fbm(pr*1.7))*(.75+.25*sin(q*22.+6.*vn(pr*.9)));\n        float edge=smoothstep(3.,3.5,q)*(1.-smoothstep(7.,11.5,q));\n        float prof=pow(3./q,2.)*edge*dn*tex;\n        float vm=sqrt(.5/q),gam=1./sqrt(1.-vm*vm);\n        float dop=dot(vec3(-p.z,0.,p.x)/q,-normalize(v));\n        float g=1./(gam*(1.-vm*dop))*sqrt(max(1.-1./q,.01));\n        float Tm=pow(3./q,.75)*g;\n        vec3 cw=vec3(1.,clamp(.38+.42*Tm,0.,1.),clamp(.06+.5*Tm*Tm,0.,1.));\n        col+=tr*prof*g*g*g*1.1*dt*cw;\n        tr*=exp(-prof*dt*1.6);\n        if(tr<.02){hit=true;break;}\n      }\n    }\n    p=np;\n  }\n  vec3 o=col;\n  if(!hit){\n    o+=tr*bg(normalize(v));\n    o+=vec3(1.,.55,.25)*exp(-(rmin-1.4)*2.2)*.03;\n  }\n  o=1.-exp(-o*1.15);\n  vec2 vv=gl_FragCoord.xy/R*2.-1.;\n  vec3 oc=pow(o,vec3(.92))*(1.-.2*dot(vv,vv))+(h21(gl_FragCoord.xy+fract(T)*91.)-.5)*.02;\n  gl_FragColor=vec4(oc,1.);\n}\n";
+  function sh(t, s) { var o = gl.createShader(t); gl.shaderSource(o, s); gl.compileShader(o); return o; }
+  var pg = gl.createProgram();
+  gl.attachShader(pg, sh(gl.VERTEX_SHADER, 'attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}'));
+  gl.attachShader(pg, sh(gl.FRAGMENT_SHADER, FS));
+  gl.linkProgram(pg);
+  if (!gl.getProgramParameter(pg, gl.LINK_STATUS)) { wrap.style.display = 'none'; return; }
+  gl.useProgram(pg);
+  gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+  var la = gl.getAttribLocation(pg, 'a'); gl.enableVertexAttribArray(la); gl.vertexAttribPointer(la, 2, gl.FLOAT, false, 0, 0);
+  var uR = gl.getUniformLocation(pg, 'R'), uT = gl.getUniformLocation(pg, 'T'), uI = gl.getUniformLocation(pg, 'INC'), uD = gl.getUniformLocation(pg, 'DIST');
+  var still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var rad = Math.PI / 180, inc = 84 * rad, target = inc, quality = .6, visible = true, running = false, prog = 0;
+  var t0 = performance.now(), last = t0, ema = 16, n = 0;
+
+  function draw(t) {
+    inc += (target - inc) * .06;
+    gl.uniform2f(uR, cv.width, cv.height);
+    gl.uniform1f(uT, t);
+    gl.uniform1f(uI, inc + (still ? 0 : .02 * Math.sin(t * .25)) - .12 * prog);
+    gl.uniform1f(uD, 30 - 11 * prog);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+  }
+  function size() {
+    var dpr = Math.min(window.devicePixelRatio || 1, 1);
+    cv.width = Math.max(360, Math.round(Math.min(wrap.clientWidth * dpr * quality, 800)));
+    cv.height = Math.round(cv.width * wrap.clientHeight / wrap.clientWidth);
+    gl.viewport(0, 0, cv.width, cv.height);
+    draw(still ? 4 : (performance.now() - t0) / 1000);
+  }
+  function frame(now) {
+    if (!visible) { running = false; return; }
+    if (now - last < 38) { requestAnimationFrame(frame); return; }
+    var dt = Math.min(now - last, 100); last = now; ema += (dt - ema) * .1;
+    draw((now - t0) / 1000);
+    if (++n % 45 === 0) {
+      if (ema > 90 && quality <= .31) { running = false; visible = false; return; }
+      if (ema > 52 && quality > .3) { quality *= .85; size(); }
+      else if (ema < 44 && quality < .8) { quality = Math.min(.8, quality * 1.1); size(); }
+    }
+    requestAnimationFrame(frame);
+  }
+  addEventListener('resize', size);
+  addEventListener('pointermove', function (e) { target = (70 + 18 * (1 - e.clientY / innerHeight)) * rad; if (still) { draw(4); } });
+  function kick() { if (!running && !still) { running = true; last = performance.now(); requestAnimationFrame(frame); } }
+  function onScroll() {
+    var y = window.scrollY / innerHeight;
+    wrap.style.opacity = 1 - .65 * Math.min(y, 1);
+    if (y < .9) { if (!visible) { visible = true; } kick(); } else { visible = false; }
+  }
+  addEventListener('scroll', onScroll, { passive: true });
+  size();
+  if (still) draw(4); else kick();
+  document.getElementById('stars').style.display = 'none';
+  wrap.classList.add('ready');
+})();
+</script>
+<script>
+(function () {
+  if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.documentElement.classList.add('js');
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('section,.baby').forEach(function (el) { el.classList.add('reveal'); io.observe(el); });
+})();
+</script>
+</body>
+</html>
